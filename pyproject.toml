@@ -41,3 +41,22 @@ packages = ["dominate"]
 
 [tool.setuptools.dynamic]
 version = {attr = "dominate.version.version"}
+
+[dependency-groups]
+coverage = [
+    "coveralls>=4.0.1",
+]
+dev = [
+    {include-group = "tests"},
+    {include-group = "nox"},
+]
+nox = [
+    "nox>=2025.5.1",
+]
+tests = [
+    "build>=1.2.2.post1",
+    "coverage>=7.8.2",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "setuptools>=80.9.0",
+]
