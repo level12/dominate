@@ -2,7 +2,7 @@ import pytest
 
 from dominate.tags import *
 from dominate.util import raw
-
+import dominate
 
 def test_arguments():
   assert html(body(h1('Hello, pyy!'))).render() == \
@@ -366,3 +366,18 @@ def test_custom_tag():
   assert Card().render() == '<div></div>'
 
   assert Card(tagname='div').render() == '<div></div>'
+
+
+class TestDashedAttrs:
+  @pytest.fixture(autouse=True)
+  def reset(self):
+      yield
+      dominate.dashed_attrs_reset()
+
+  def test_default(self):
+    assert div(hx_post='/clicked').render() == '<div hx_post="/clicked"></div>'
+
+  def test_default(self):
+    dominate.dashed_attrs_add('hx_', 'un_')
+    assert div(hx_post='/clicked').render() == '<div hx-post="/clicked"></div>'
+    assert div(un_post='/clicked').render() == '<div un-post="/clicked"></div>'
