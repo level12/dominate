@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git checkout -b dominate/"$1"
+git rebase --onto dominate/master master "$1"

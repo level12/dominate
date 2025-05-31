@@ -6,3 +6,8 @@ _.python.venv.create = true
 
 PYTHONUNBUFFERED = '1'
 
+[task_config]
+includes = [
+    'tasks',
+]
+
